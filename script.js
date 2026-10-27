@@ -184,42 +184,8 @@ function submitOrder(event) {
         alert("Please complete all your delivery details.");
         return;
     }
-
-    // Prepare the order summary.
-    const orderItems = Object.entries(cart).map(
-        ([name, item]) => ({
-            product: name,
-            quantity: item.quantity,
-            unitPrice: item.price,
-            subtotal: item.price * item.quantity
-        })
-    );
-
-    const order = {
-        customerName,
-        customerPhone,
-        customerAddress,
-        paymentMethod,
-        items: orderItems,
-        total: getCartTotal(),
-        createdAt: new Date().toISOString()
-    };
-
-    // Preview the order while the real order system is being built.
-    const summary = order.items.map(
-        item => `${item.product} x ${item.quantity}`
-    ).join("\n");
-
-    alert(
-        "Your order details have been prepared!\n\n" +
-        summary +
-        "\n\nTotal: " + formatNaira(order.total) +
-        "\nPayment: " + order.paymentMethod +
-        "\n\nDEMO ONLY: Your order has NOT been sent to FADI'S EGG yet."
-    );
-
-    console.log("Prepared demonstration order:", order);
-}
+    // Open WhatsApp with the customer's order.
+    orderOnWhatsApp();}
 function orderOnWhatsApp() {
     if (Object.keys(cart).length === 0) {
         alert("Please add products to your cart first.");
